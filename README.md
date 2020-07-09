@@ -4,6 +4,4 @@ com.demo.model.WordCounterLongAdder
 Reduced Memory Library
 com.demo.model.WordCountTrie
 
-Ignore classes in : com.demo.model.archive. 
-These are deprecated demo classes
-
+Some further enhancements can be made to speed up calls. 
