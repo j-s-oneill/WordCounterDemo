@@ -1,7 +1,7 @@
-Concurrent Library
+Concurrent Implementation utilitising LongAdder and Concurrent Hashmap:
 com.demo.model.WordCounterLongAdder
 
-Reduced Memory Library
+Single Thread Implementation using Trie DataStructure:
 com.demo.model.WordCountTrie
 
-Some further enhancements can be made to speed up calls. 
+Some tech debt to be resolved on some of the calls, this demo serves as an initial iteration.
