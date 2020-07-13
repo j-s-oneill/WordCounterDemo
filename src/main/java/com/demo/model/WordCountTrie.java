@@ -32,10 +32,10 @@ public class WordCountTrie implements WordCounter {
 
 	private Node get(Node node, String key, int index) {
 		if (node == null)	return null;
-		if (index == key.length()) return node;
+		if (index == key.length()) return node; //when we have the char_index= length of the key/word we return
 		
 		char c = key.charAt(index);
-		return get(node.next[getIndex(c)], key, index + 1);
+		return get(node.next[getIndex(c)], key, index + 1);  //move to the next node i.e. charater 2
 	}
 
 	private void put(String key, long val) {
