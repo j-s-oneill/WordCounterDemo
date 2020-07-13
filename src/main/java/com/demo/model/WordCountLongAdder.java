@@ -19,12 +19,13 @@ public class WordCountLongAdder implements WordCounter {
    
 	public void add(String word) {
 		word = translator.translate(word);
-		validate(word);		
+		word = validate(word);		
 		map.computeIfAbsent(word.toLowerCase(),k-> new LongAdder()).increment();
 	}
 
     public long count(String word){
-    	validate(word);	
+    	word = translator.translate(word);
+    	word = validate(word);	
     	LongAdder adder = map.get(word.toLowerCase());
         if(adder != null){
             return adder.longValue();
