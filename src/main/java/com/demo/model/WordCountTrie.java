@@ -14,6 +14,9 @@ public class WordCountTrie implements WordCounter {
 	private final Lock readLock = RWLock.readLock();
 	private final Lock writeLock = RWLock.writeLock();
 
+	// Future Enhancement: I could put out the Trie code and implement the java collection, 
+	//allowing for datastructures to easily swapped 
+	
 	public WordCountTrie(Translator translator) {
 		this.translator = translator;
 	}

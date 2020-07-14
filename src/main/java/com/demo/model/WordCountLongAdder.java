@@ -15,12 +15,11 @@ public class WordCountLongAdder implements WordCounter {
 	private final Lock readLock = RWLock.readLock();
 	private final Lock writeLock = RWLock.writeLock();
 
-	//please note:
-	//I would prefer to call 
-	// "translator.translate(word)" and validate(word)		 
-	// outside of this client code, and I can then remove the RWlock and let the HashMap and LongAdder 
-	// handle concurrent increments provide we pass a valid/translated word
-	// the spec stated I can only have one "add" and  one "count" method so unfortunately I have to wrap with a rwlock .
+	// Future Enhancement: I would prefer to call: translate() and validate()		 
+	// outside of this client code,  I can then remove the RWlock and let the HashMap and LongAdder handle concurrent increments only
+	// as long as I provide a valid/translated word
+	// the spec stated I can only have one "add" and  one "count" method so unfortunately I have to wrap with a rwlock.
+	// I have commented this out for demo purposes. RWLock will only allow one thread to add() at a time and will be slow.
 	
 	public WordCountLongAdder(Translator translator) {
 		this.translator = translator;
@@ -30,21 +29,21 @@ public class WordCountLongAdder implements WordCounter {
 
 	@Override
 	public void add(String word) {		
-		writeLock.lock();
+		//writeLock.lock();
 		try {
 
 			word = translator.translate(word);		 
 			word = validate(word);
 			map.computeIfAbsent(word, k -> new LongAdder()).increment();
 		} finally {
-			writeLock.unlock();
+	//		writeLock.unlock();
 		}
 
 	}
 
 	@Override
 	public long count(String word) {
-		readLock.lock();
+//		readLock.lock();
 		try {
 			word = translator.translate(word);
 			word = validate(word);
@@ -55,7 +54,7 @@ public class WordCountLongAdder implements WordCounter {
 			}
 			return 0;
 		} finally {
-			readLock.unlock();
+	//		readLock.unlock();
 		}
 
 	}
